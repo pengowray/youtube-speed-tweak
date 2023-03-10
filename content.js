@@ -1,3 +1,6 @@
+_speedtweak = {};
+(function(g) {
+	
 var customPlaybackRate = 1;
 var letYoutubeHandleNormal = true;
 var lastSpeedElement = null;
@@ -124,3 +127,11 @@ document.addEventListener("keydown", function(event) {
     }
   }
 });
+
+})(_speedtweak);
+
+//browser.tabs.onUpdated.addListener(function(tabId, changeInfo) {
+//    if (changeInfo.status == "complete") {
+//        console.log("*** loaded page ***");
+//    }
+//})
