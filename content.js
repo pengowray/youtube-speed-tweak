@@ -6,13 +6,20 @@ var letYoutubeHandleNormal = true;
 var lastSpeedElement = null;
 var customDebugMode = false;
 
+var lastChange = 0; // direction of last change 1/0/-1
+var lastYoutubeVal = -1;
+
 function increasePlaybackSpeedOverride() {
   var video = document.getElementsByTagName("video")[0];
   //if (letYoutubeHandleNormal && customPlaybackRate > .4 && customPlaybackRate < 1.85) {
-  if (letYoutubeHandleNormal && video.playbackRate > .4 && video.playbackRate < 1.85) {
+  if (letYoutubeHandleNormal && video.playbackRate > .4 && video.playbackRate < 1.85
+      && (lastChange != 1 || video.playbackRate != lastYoutubeVal)) {
+
     // let youtube handle it
     customPlaybackRate = video.playbackRate;
     displayNewSpeed(video.playbackRate, "no override");
+    lastChange = 1;
+    lastYoutubeVal = video.playbackRate;
     return; 
   }
   
@@ -27,6 +34,9 @@ function increasePlaybackSpeedOverride() {
 
   document.getElementsByTagName("video")[0].playbackRate = customPlaybackRate;
   displayNewSpeed(video.playbackRate, "overriden");
+  
+  lastChange = 1;
+  lastYoutubeVal = video.playbackRate;
   //event.preventDefault();
   event.stopPropagation();
 
@@ -35,10 +45,13 @@ function increasePlaybackSpeedOverride() {
 function decreasePlaybackSpeedOverride() {
   var video = document.getElementsByTagName("video")[0];
   //if (letYoutubeHandleNormal && customPlaybackRate > .4 && customPlaybackRate < 1.85) {
-  if (letYoutubeHandleNormal && video.playbackRate > .4 && video.playbackRate < 1.85) {
+  if (letYoutubeHandleNormal && video.playbackRate > .4 && video.playbackRate < 1.85
+        && (lastChange != -1 || video.playbackRate != lastYoutubeVal)) {
     // let youtube handle it
     customPlaybackRate = video.playbackRate;
     displayNewSpeed(video.playbackRate, "no override");
+    lastChange = -1;
+    lastYoutubeVal = video.playbackRate;
     return; 
   }
   
@@ -51,7 +64,9 @@ function decreasePlaybackSpeedOverride() {
     customPlaybackRate = .1;
   }
   document.getElementsByTagName("video")[0].playbackRate = customPlaybackRate;
-  displayNewSpeed(video.playbackRate, "overridden");
+  displayNewSpeed(video.playbackRate, "overridden");  
+  lastChange = -1;
+  lastYoutubeVal = video.playbackRate;
 
   //event.preventDefault();
   event.stopPropagation();
