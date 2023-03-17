@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "YouTube Speed Tweak",
+  "version": "1.1",
+  "description": "Increases YouTube playback speed up to 5x using the standard keyboard shortcuts.",
+  
+    "icons": {
+      "48": "icons/speedtweak-icon-48.png",
+      "128": "icons/speedtweak-icon-128.png"
+  },
+  
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+  
+  
+}

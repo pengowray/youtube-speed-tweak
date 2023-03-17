@@ -1,4 +1,4 @@
-_speedtweak = {};
+var _speedtweak = {};
 (function(g) {
 	
 var customPlaybackRate = 1;
@@ -144,9 +144,10 @@ document.addEventListener("keydown", function(event) {
 });
 
 })(_speedtweak);
+console.log("** speed tweak loaded ** ");
 
-//browser.tabs.onUpdated.addListener(function(tabId, changeInfo) {
-//    if (changeInfo.status == "complete") {
-//        console.log("*** loaded page ***");
-//    }
-//})
+browser.tabs.onUpdated.addListener(function(tabId, changeInfo) {
+    if (changeInfo.status == "complete") {
+        console.log("*** loaded page ***");
+    }
+})
